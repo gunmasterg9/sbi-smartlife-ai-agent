@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SBI SmartLife AI Agent - Pitch Deck</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0a0e1a;
+      --bg-card: rgba(13, 20, 38, 0.7);
+      --border-glow: rgba(0, 229, 255, 0.15);
+      --text-primary: #ffffff;
+      --text-secondary: #94a3b8;
+      
+      /* Neon Colors */
+      --cyan: #00e5ff;
+      --violet: #a855f7;
+      --emerald: #10b981;
+      --gold: #eab308;
+      --rose: #f43f5e;
+      --sbi-blue: #1a237e;
+      --sbi-light: #3949ab;
+      
+      --font-title: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Ambient glowing spheres in background */
+    .glow-sphere {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(140px);
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+    .sphere-1 {
+      top: -10%;
+      left: -10%;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, var(--sbi-blue) 0%, transparent 80%);
+    }
+    .sphere-2 {
+      bottom: -10%;
+      right: -10%;
+      width: 45vw;
+      height: 45vw;
+      background: radial-gradient(circle, var(--violet) 0%, transparent 80%);
+    }
+    .sphere-3 {
+      top: 40%;
+      left: 50%;
+      width: 30vw;
+      height: 30vw;
+      background: radial-gradient(circle, var(--cyan) 0%, transparent 80%);
+      opacity: 0.15;
+    }
+
+    /* Layout structure */
+    header {
+      height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(10, 14, 26, 0.6);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sbi-badge {
+      background: var(--sbi-blue);
+      color: white;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-family: var(--font-title);
+      letter-spacing: 0.5px;
+      border: 1px solid var(--sbi-light);
+    }
+
+    .deck-title {
+      font-family: var(--font-title);
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+
+    .slide-progress-container {
+      flex: 1;
+      max-width: 300px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      margin: 0 40px;
+      position: relative;
+    }
+
+    .slide-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
+      border-radius: 2px;
+      width: 6.66%;
+      transition: width 0.3s ease;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+    }
+
+    /* Main presentation workspace */
+    .deck-workspace {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 40px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .slide-container {
+      width: 100%;
+      max-width: 1100px;
+      height: 600px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 229, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 50px;
+      transition: border-color 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    /* Dynamic Border Colors based on active slide category */
+    .slide-container.theme-cyan { border-color: rgba(0, 229, 255, 0.3); box-shadow: 0 0 40px rgba(0, 229, 255, 0.08); }
+    .slide-container.theme-violet { border-color: rgba(168, 85, 247, 0.3); box-shadow: 0 0 40px rgba(168, 85, 247, 0.08); }
+    .slide-container.theme-rose { border-color: rgba(244, 63, 94, 0.3); box-shadow: 0 0 40px rgba(244, 63, 94, 0.08); }
+    .slide-container.theme-emerald { border-color: rgba(16, 185, 129, 0.3); box-shadow: 0 0 40px rgba(16, 185, 129, 0.08); }
+    .slide-container.theme-gold { border-color: rgba(234, 179, 8, 0.3); box-shadow: 0 0 40px rgba(234, 179, 8, 0.08); }
+
+    /* Individual slides */
+    .slide {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Header */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .slide-title {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 38px;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 30%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide-tag {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid currentColor;
+    }
+
+    /* Slide Content Layouts */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      overflow: hidden;
+    }
+
+    .slide-left {
+      flex: 1.2;
+    }
+
+    .slide-right {
+      flex: 0.8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Typography / Lists */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .bullet-item strong {
+      color: var(--text-primary);
+    }
+
+    .bullet-icon {
+      margin-top: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Specific layouts and graphical representations */
+    .hero-title {
+      font-size: 54px;
+      line-height: 1.1;
+      font-family: var(--font-title);
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 750px;
+    }
+
+    /* Slide 1 Visual Animation */
+    .neural-mesh {
+      position: relative;
+      width: 240px;
+      height: 240px;
+    }
+    .node-circle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px dashed rgba(0, 229, 255, 0.2);
+    }
+    .circle-1 { width: 220px; height: 220px; animation: rotateCW 20s linear infinite; }
+    .circle-2 { width: 140px; height: 140px; animation: rotateCCW 15s linear infinite; }
+    .circle-3 { 
+      width: 60px; 
+      height: 60px; 
+      background: radial-gradient(circle, var(--sbi-blue) 0%, var(--sbi-light) 100%);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+    }
+
+    @keyframes rotateCW {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    @keyframes rotateCCW {
+      from { transform: translate(-50%, -50%) rotate(360deg); }
+      to { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+
+    .node-point {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
+    }
+    .node-p1 { top: 0; left: 50%; margin-left: -5px; }
+    .node-p2 { bottom: 20%; right: 10%; }
+    .node-p3 { bottom: 20%; left: 10%; }
+
+    /* Slide 2 Visual Chart representation */
+    .challenge-graphic {
+      width: 300px;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+    }
+    .graphic-row {
+      margin-bottom: 20px;
+    }
+    .graphic-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .progress-bar-wrap {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1s ease;
+    }
+
+    /* Slide 3 Digital Twin Widget Mock */
+    .twin-widget {
+      width: 320px;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.05) 0%, rgba(13, 20, 38, 0.8) 100%);
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+    .twin-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .avatar-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid var(--cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .twin-score-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .twin-score-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .twin-score-num {
+      font-family: var(--font-title);
+      font-size: 22px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    /* Slide 4 Diagram */
+    .arch-diagram {
+      width: 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .diagram-node {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 12px 20px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .diagram-node.active-node {
+      border-color: var(--cyan);
+      background: rgba(0, 229, 255, 0.05);
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
+    }
+    .diagram-connector {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* Slide 5 Table */
+    .slide-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    .slide-table th {
+      text-align: left;
+      font-family: var(--font-title);
+      font-weight: 700;
+      color: var(--text-primary);
+      padding: 12px 16px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+      font-size: 15px;
+    }
+    .slide-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .slide-table tr:hover td {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.01);
+    }
+    .agent-pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    /* Slide 6 Steps */
+    .timeline-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+    }
+    .timeline-step {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-title);
+      font-weight: 700;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+    .timeline-step.active-step .step-num {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: #000;
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+    }
+    .step-details h4 {
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+    .step-details p {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Slide 7 Visual dashboard grid */
+    .dashboard-modules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 360px;
+    }
+    .module-mini-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 16px;
+      transition: all 0.2s ease;
+    }
+    .module-mini-card:hover {
+      border-color: var(--cyan);
+      background: rgba(0, 229, 255, 0.02);
+    }
+    .module-icon {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    /* Slide 8 KPI boxes */
+    .kpi-boxes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 320px;
+    }
+    .kpi-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+    .kpi-box-num {
+      font-family: var(--font-title);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--cyan);
+      margin-bottom: 4px;
+    }
+    .kpi-box-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Slide 9 Padlock lock animation area */
+    .shield-security {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .shield-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px dashed rgba(16, 185, 129, 0.15);
+      animation: rotateCW 30s linear infinite;
+    }
+    .shield-card {
+      width: 130px;
+      height: 130px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, rgba(10, 14, 26, 0.8) 100%);
+      border: 1px solid var(--emerald);
+      box-shadow: 0 0 35px rgba(16, 185, 129, 0.2);
+      border-radius: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+
+    /* Slide 10 Stack visual */
+    .tech-stack-graphic {
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .stack-layer {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    .stack-label {
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+    .stack-val {
+      font-weight: 600;
+    }
+
+    /* Slide 11 Node scalability visual */
+    .docker-nodes {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .docker-node {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      position: relative;
+    }
+    .docker-node.active-node {
+      border-color: var(--cyan);
+      background: rgba(0, 229, 255, 0.03);
+      box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
+    }
+    .docker-node-label {
+      font-size: 9px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    /* Slide 13 Timeline Roadmap Chevrons */
+    .roadmap-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+    .roadmap-item {
+      display: flex;
+      gap: 20px;
+    }
+    .roadmap-date {
+      font-family: var(--font-title);
+      font-weight: 800;
+      color: var(--gold);
+      width: 80px;
+      flex-shrink: 0;
+      font-size: 16px;
+      padding-top: 2px;
+    }
+
+    /* Slide 14 Compare Table */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 360px;
+    }
+    .compare-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 16px;
+    }
+    .compare-card.highlight {
+      border-color: var(--cyan);
+      background: rgba(0, 229, 255, 0.02);
+    }
+    .compare-title {
+      font-weight: 700;
+      font-family: var(--font-title);
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    .compare-item {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Slide Footer / Controls */
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 24px;
+    }
+
+    .slide-num-indicator {
+      font-family: var(--font-title);
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .nav-controls {
+      display: flex;
+      gap: 16px;
+    }
+
+    .nav-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 18px;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      border-color: rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.01);
+    }
+
+    /* Sidebar Index Drawer */
+    .index-drawer {
+      position: absolute;
+      top: 70px;
+      left: -320px;
+      width: 320px;
+      height: calc(100vh - 70px);
+      background: rgba(10, 14, 26, 0.95);
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      z-index: 100;
+      padding: 30px 20px;
+      transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+    }
+
+    .index-drawer.open {
+      left: 0;
+    }
+
+    .index-item {
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid transparent;
+    }
+
+    .index-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-primary);
+    }
+
+    .index-item.active {
+      background: rgba(0, 229, 255, 0.05);
+      border-color: rgba(0, 229, 255, 0.2);
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    /* Presenter Notes split panel styling */
+    .notes-panel {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0px;
+      background: rgba(8, 12, 23, 0.98);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 90;
+      transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 0 40px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .notes-panel.open {
+      height: 180px;
+      padding: 24px 40px;
+    }
+
+    .notes-header {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .notes-content {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      overflow-y: auto;
+      font-style: italic;
+    }
+
+    /* Helper styling */
+    .text-cyan { color: var(--cyan); }
+    .text-violet { color: var(--violet); }
+    .text-rose { color: var(--rose); }
+    .text-emerald { color: var(--emerald); }
+    .text-gold { color: var(--gold); }
+    
+    .border-cyan { color: var(--cyan); }
+    .border-violet { color: var(--violet); }
+    .border-rose { color: var(--rose); }
+    .border-emerald { color: var(--emerald); }
+    .border-gold { color: var(--gold); }
+
+    /* Custom Scrollbar for Drawer/Notes */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient BG Glows -->
+  <div class="glow-sphere sphere-1"></div>
+  <div class="glow-sphere sphere-2"></div>
+  <div class="glow-sphere sphere-3"></div>
+
+  <!-- Header Bar -->
+  <header>
+    <div class="logo-container">
+      <div class="sbi-badge">SBI</div>
+      <div class="deck-title">SmartLife AI Agent Platform</div>
+    </div>
+    
+    <div class="slide-progress-container">
+      <div class="slide-progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="header-controls">
+      <button class="header-btn" onclick="toggleIndexDrawer()">
+        ☰ Index
+      </button>
+      <button class="header-btn" id="notesToggleBtn" onclick="toggleNotesPanel()">
+        🎙️ Script
+      </button>
+      <button class="header-btn" onclick="toggleFullscreen()">
+        ⛶ Fullscreen
+      </button>
+    </div>
+  </header>
+
+  <!-- Sidebar Index Drawer -->
+  <div class="index-drawer" id="indexDrawer">
+    <!-- Will be populated dynamically via JavaScript -->
+  </div>
+
+  <!-- Main Presentation Slides Area -->
+  <div class="deck-workspace">
+    <div class="slide-container" id="slideContainer">
+      
+      <!-- Slide 1: Cover & Intro -->
+      <div class="slide active" data-theme="cyan" data-tag="Overview">
+        <div class="slide-header">
+          <h2 class="slide-title">SBI SmartLife</h2>
+          <span class="slide-tag border-cyan text-cyan">Slide 1</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <h1 class="hero-title">The Autonomous Banking Growth Platform</h1>
+            <p class="hero-subtitle">Orchestrating customer lifetime value through Customer Digital Twins and Collaborative Multi-Agent AI.</p>
+          </div>
+          <div class="slide-right">
+            <div class="neural-mesh">
+              <div class="node-circle circle-1">
+                <div class="node-point node-p1"></div>
+                <div class="node-point node-p2"></div>
+              </div>
+              <div class="node-circle circle-2">
+                <div class="node-point node-p3"></div>
+              </div>
+              <div class="node-circle circle-3">🏦</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">01 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" disabled onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "Good morning, esteemed panel. Today, we present SBI SmartLife—an autonomous banking growth platform that moves customer engagement from reactive, spam-heavy notifications to predictive, value-driven financial journeys. By modeling customers mathematically as Digital Twins, we unlock hyper-personalized cross-selling at scale."
+        </div>
+      </div>
+
+      <!-- Slide 2: The Core Challenge -->
+      <div class="slide" data-theme="rose" data-tag="Problem Statement">
+        <div class="slide-header">
+          <h2 class="slide-title">The Passive Customer & Engagement Gap</h2>
+          <span class="slide-tag border-rose text-rose">Slide 2</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <ul class="bullet-list">
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--rose);"></span>
+                <div><strong>Reactive Support:</strong> RM advisory services are manually intensive and reserved for HNI clients.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--rose);"></span>
+                <div><strong>Low Adoption:</strong> Mobile banking features and digital products (YONO, UPI) suffer from low utilization rates.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--rose);"></span>
+                <div><strong>Notification Blindness:</strong> Generic marketing emails/SMS have click-through rates under 1.5%.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--rose);"></span>
+                <div><strong>Missed Windows:</strong> Loan pre-approvals are pitched *after* a customer buys a property.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="slide-right">
+            <div class="challenge-graphic">
+              <div class="graphic-row">
+                <div class="graphic-label"><span>Acquisition Cost</span> <span class="text-rose">High</span></div>
+                <div class="progress-bar-wrap"><div class="progress-fill" style="width: 85%; background: var(--rose);"></div></div>
+              </div>
+              <div class="graphic-row">
+                <div class="graphic-label"><span>Active Engagement</span> <span class="text-rose">1.5%</span></div>
+                <div class="progress-bar-wrap"><div class="progress-fill" style="width: 15%; background: var(--rose);"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">02 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "State Bank of India manages over 500 million accounts. Yet, keeping these customers engaged is an uphill battle. We flood their inboxes with generic credit card offers, while crucial life events—like a salary jump or a new home search—go completely unnoticed. Current systems are reactive, waiting for customers to discover products themselves."
+        </div>
+      </div>
+
+      <!-- Slide 3: The Innovation: Customer Digital Twin -->
+      <div class="slide" data-theme="cyan" data-tag="Innovation">
+        <div class="slide-header">
+          <h2 class="slide-title">The Living Digital Twin (🧬)</h2>
+          <span class="slide-tag border-cyan text-cyan">Slide 3</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <ul class="bullet-list">
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Dynamic Modeling:</strong> A 360° virtual representation of a customer's financial personality.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Behavioral Vectors:</strong> Analyzes transaction velocity, category spend, and YONO login patterns.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Continuous Computation:</strong> Evaluates Wellness, Credit, and Churn risk scores weekly.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Predictive Trajectory:</strong> Evaluates what a customer will need 3 months before they request it.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="slide-right">
+            <div class="twin-widget">
+              <div class="twin-header">
+                <div class="avatar-icon">👤</div>
+                <div>
+                  <h4 style="font-size: 15px; font-weight: 700;">Customer Digital Twin</h4>
+                  <p style="font-size: 11px; color: var(--cyan);">Priya Patel • Active</p>
+                </div>
+              </div>
+              <div class="twin-score-grid">
+                <div class="twin-score-card">
+                  <div style="font-size: 10px; color: var(--text-secondary);">Digital Maturity</div>
+                  <div class="twin-score-num text-cyan">78%</div>
+                </div>
+                <div class="twin-score-card">
+                  <div style="font-size: 10px; color: var(--text-secondary);">Wellness Score</div>
+                  <div class="twin-score-num text-cyan">72.5</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">03 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "Our core innovation is the Customer Digital Twin. Instead of a static database row, it is a living mathematical profile of the customer's financial life. It tracks spending, calculates wellness scores, and maps behavioral vectors to anticipate their next financial requirement."
+        </div>
+      </div>
+
+      <!-- Slide 4: Multi-Agent Collaborative Architecture -->
+      <div class="slide" data-theme="violet" data-tag="Architecture">
+        <div class="slide-header">
+          <h2 class="slide-title">Six Specialists, One Intelligent Graph</h2>
+          <span class="slide-tag border-violet text-violet">Slide 4</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <ul class="bullet-list">
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--violet);"></span>
+                <div><strong>LangGraph Supervisor:</strong> Intent classification and conditional edge routing.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--violet);"></span>
+                <div><strong>Compliance Gate:</strong> Built-in guardrails checking RBI guidelines and DPDP consent logs.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--violet);"></span>
+                <div><strong>Specialists Ecosystem:</strong> 6 specialized agents working in parallel.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--violet);"></span>
+                <div><strong>Vector Database:</strong> Semantic retrieval using ChromaDB for product descriptions and FAQs.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="slide-right">
+            <div class="arch-diagram">
+              <div class="diagram-node">User Event Trigger</div>
+              <div class="diagram-connector">↓</div>
+              <div class="diagram-node active-node">LangGraph Orchestrator (Supervisor)</div>
+              <div class="diagram-connector">↓</div>
+              <div class="diagram-node">6 Parallel Specialist Agents</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">04 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "To drive this digital twin, we built a LangGraph-based multi-agent system. An Orchestrator classifies user intent and routes it to six specialist agents: Acquisition, Wellness, Digital Adoption, Engagement, Life Events, and Relationship. They collaborate, share context, and execute workflows in parallel."
+        </div>
+      </div>
+
+      <!-- Slide 5: The Specialist Agents Break Down -->
+      <div class="slide" data-theme="violet" data-tag="Agent Roles">
+        <div class="slide-header">
+          <h2 class="slide-title">Meet the AI Specialists</h2>
+          <span class="slide-tag border-violet text-violet">Slide 5</span>
+        </div>
+        <div class="slide-body" style="align-items: flex-start;">
+          <table class="slide-table">
+            <thead>
+              <tr>
+                <th>Specialist Agent</th>
+                <th>Core Responsibility</th>
+                <th>Hackathon Metric</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="agent-pill" style="background:rgba(0, 229, 255, 0.1); color: var(--cyan);">Acquisition Agent</span></td>
+                <td>Conversational onboarding, smart KYC verification</td>
+                <td>Lead Conversion</td>
+              </tr>
+              <tr>
+                <td><span class="agent-pill" style="background:rgba(168, 85, 247, 0.1); color: var(--violet);">Adoption Agent</span></td>
+                <td>Guides YONO, UPI, and digital features walkthroughs</td>
+                <td>Digital Maturity</td>
+              </tr>
+              <tr>
+                <td><span class="agent-pill" style="background:rgba(244, 63, 94, 0.1); color: var(--rose);">Engagement Agent</span></td>
+                <td>Loyalty rewards, gamification, targeted campaigns</td>
+                <td>Click-Through Rate</td>
+              </tr>
+              <tr>
+                <td><span class="agent-pill" style="background:rgba(16, 185, 129, 0.1); color: var(--emerald);">Wellness Agent</span></td>
+                <td>Budget audits, savings milestones, debt coaching</td>
+                <td>Retention Rate</td>
+              </tr>
+              <tr>
+                <td><span class="agent-pill" style="background:rgba(234, 179, 8, 0.1); color: var(--gold);">Life Events Agent</span></td>
+                <td>Transaction pattern logs to detect salary, marriage, housing</td>
+                <td>Cross-Sell Efficiency</td>
+              </tr>
+              <tr>
+                <td><span class="agent-pill" style="background:rgba(0, 229, 255, 0.1); color: var(--cyan);">Relationship Manager</span></td>
+                <td>Direct support, customer query routing & CSAT logs</td>
+                <td>CSAT Score</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">05 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "Each agent is a specialized LLM worker. For example, the Wellness Agent reviews budgets and recommends savings milestones, while the Life Events Agent processes transaction feeds to detect salary hikes, marriage, or property searches, passing high-confidence leads to the Relationship Manager."
+        </div>
+      </div>
+
+      <!-- Slide 6: Walkthrough: The Proactive Customer Journey -->
+      <div class="slide" data-theme="cyan" data-tag="User Flow">
+        <div class="slide-header">
+          <h2 class="slide-title">A Day in the Life of "Priya"</h2>
+          <span class="slide-tag border-cyan text-cyan">Slide 6</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <div class="timeline-steps">
+              <div class="timeline-step active-step">
+                <div class="step-num">1</div>
+                <div class="step-details">
+                  <h4>Salary Credit Detected</h4>
+                  <p>Priya receives a monthly transaction showing a 20% increase.</p>
+                </div>
+              </div>
+              <div class="timeline-step active-step">
+                <div class="step-num">2</div>
+                <div class="step-details">
+                  <h4>Twin Trait Updated</h4>
+                  <p>Life Events Agent detects the salary jump and updates the Twin profile.</p>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <div class="step-num">3</div>
+                <div class="step-details">
+                  <h4>Wellness & Engagement Match</h4>
+                  <p>Wellness Agent identifies investible surplus; Engagement Agent maps pre-approved SIP.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-right">
+            <div class="timeline-steps">
+              <div class="timeline-step">
+                <div class="step-num">4</div>
+                <div class="step-details">
+                  <h4>Conversational Activation</h4>
+                  <p>When Priya logs in, YONO Chatbot explains mutual fund advantages.</p>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <div class="step-num">5</div>
+                <div class="step-details">
+                  <h4>Complete Setup</h4>
+                  <p>SIP setup completed inside chat interface in under 60 seconds.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">06 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "Let's see how this works in real life. Priya Patel gets a salary increase. Instantly, the Life Events agent detects the increase and updates her digital twin. The Wellness agent notes the investible surplus, and the Engagement agent prepares a pre-approved SIP offer. When Priya opens the YONO app, the chatbot guides her through the benefits, setting up the SIP in under 60 seconds."
+        </div>
+      </div>
+
+      <!-- Slide 7: Interactive Demo: The 12-Module Dashboard -->
+      <div class="slide" data-theme="cyan" data-tag="Dashboard">
+        <div class="slide-header">
+          <h2 class="slide-title">Enterprise-Grade Operator Dashboard</h2>
+          <span class="slide-tag border-cyan text-cyan">Slide 7</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <ul class="bullet-list">
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Customer Portal:</strong> Personal AI chat, wellness score check, and interactive Twin.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Relationship Manager View:</strong> Real-time customer lead logs, active campaigns, and event timelines.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Compliance Command Center:</strong> DPDP Act consent monitors and RBI check logs.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>System Administration:</strong> Server health, API latency, and database connection pools.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="slide-right">
+            <div class="dashboard-modules-grid">
+              <div class="module-mini-card">
+                <div class="module-icon">👥</div>
+                <div style="font-size: 11px; font-weight:700;">Customer</div>
+              </div>
+              <div class="module-mini-card">
+                <div class="module-icon">🤝</div>
+                <div style="font-size: 11px; font-weight:700;">RM Portal</div>
+              </div>
+              <div class="module-mini-card">
+                <div class="module-icon">🛡️</div>
+                <div style="font-size: 11px; font-weight:700;">Compliance</div>
+              </div>
+              <div class="module-mini-card">
+                <div class="module-icon">⚙️</div>
+                <div style="font-size: 11px; font-weight:700;">System Admin</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">07 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "We didn't just build a chatbot; we built a complete production-grade enterprise dashboard. It contains 12 modules customized for customers, relationship managers, compliance officers, and system administrators, all powered by live backend APIs."
+        </div>
+      </div>
+
+      <!-- Slide 8: Business Value & Monetization -->
+      <div class="slide" data-theme="emerald" data-tag="Business Case">
+        <div class="slide-header">
+          <h2 class="slide-title">Turning Data into Retained Capital</h2>
+          <span class="slide-tag border-emerald text-emerald">Slide 8</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <ul class="bullet-list">
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--emerald);"></span>
+                <div><strong>Lower Acquisition Cost:</strong> Automated conversational KYC and onboarding.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--emerald);"></span>
+                <div><strong>Enhanced Cross-Selling:</strong> Targeted pre-approvals for loans and mutual funds.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--emerald);"></span>
+                <div><strong>Customer Retention:</strong> High-value financial wellness coaching creates brand loyalty.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--emerald);"></span>
+                <div><strong>Branch Offloading:</strong> 70%+ of basic queries handled instantly by specialized agents.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="slide-right">
+            <div class="kpi-boxes-grid">
+              <div class="kpi-box">
+                <div class="kpi-box-num">+18%</div>
+                <div class="kpi-box-label">Cross-sell conversion</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-box-num">-40%</div>
+                <div class="kpi-box-label">Onboarding friction</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">08 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "SBI SmartLife drives growth through three core channels: increasing loan and credit card cross-sell conversions, reducing onboarding friction via automated KYC, and retaining deposits by helping customers save and invest directly through SBI wellness goals."
+        </div>
+      </div>
+
+      <!-- Slide 9: DPDP Act 2023 & RBI Compliance -->
+      <div class="slide" data-theme="emerald" data-tag="Compliance">
+        <div class="slide-header">
+          <h2 class="slide-title">Trust by Design, Compliant by Default</h2>
+          <span class="slide-tag border-emerald text-emerald">Slide 9</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <ul class="bullet-list">
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--emerald);"></span>
+                <div><strong>DPDP Act Consent Manager:</strong> 1-click granular review and revocation of data access.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--emerald);"></span>
+                <div><strong>RBI Circular Guardrails:</strong> Automated filters block misleading product recommendations.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--emerald);"></span>
+                <div><strong>Immutable Auditing:</strong> All agent interactions are logged in a tamper-evident DB table.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--emerald);"></span>
+                <div><strong>Zero LLM Data Leakage:</strong> Context filtering prevents PII from leaving private servers.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="slide-right">
+            <div class="shield-security">
+              <div class="shield-ring"></div>
+              <div class="shield-card">🛡️</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">09 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "Banking-grade compliance is in our DNA. We have built-in support for India's Digital Personal Data Protection (DPDP) Act of 2023, allowing users to inspect and withdraw consent. Furthermore, a rule-checking middleware filters all agent suggestions to verify compliance with RBI regulations before they reach the user."
+        </div>
+      </div>
+
+      <!-- Slide 10: Technical Architecture -->
+      <div class="slide" data-theme="cyan" data-tag="Technology">
+        <div class="slide-header">
+          <h2 class="slide-title">Async, Lightweight, & Containerized</h2>
+          <span class="slide-tag border-cyan text-cyan">Slide 10</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <ul class="bullet-list">
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Next.js 16 + React:</strong> Interactive charts powered by Recharts, styled with Tailwind CSS.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>FastAPI Backend:</strong> High-performance asynchronous Python framework.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>LangGraph + Gemini 2.5:</strong> StateGraph execution with Gemini 2.5 Flash for high-speed reasoning.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>ChromaDB + PostgreSQL:</strong> Hybrid relational and vector storage.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="slide-right">
+            <div class="tech-stack-graphic">
+              <div class="stack-layer"><span class="stack-label">Frontend</span> <span class="stack-val">Next.js / Recharts</span></div>
+              <div class="stack-layer"><span class="stack-label">Backend</span> <span class="stack-val">FastAPI (Async)</span></div>
+              <div class="stack-layer"><span class="stack-label">AI Engine</span> <span class="stack-val">LangGraph / Gemini</span></div>
+              <div class="stack-layer"><span class="stack-label">Database</span> <span class="stack-val">PostgreSQL / Chroma</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">10 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "Under the hood, the architecture is fully modern and containerized. The frontend is built in React/Next.js for sub-second responses. The backend uses FastAPI with async connection pools. The AI engine runs on LangGraph orchestrated by Google's Gemini, using ChromaDB for real-time document search and vector storage."
+        </div>
+      </div>
+
+      <!-- Slide 11: Deployment & Scalability -->
+      <div class="slide" data-theme="cyan" data-tag="Deployment">
+        <div class="slide-header">
+          <h2 class="slide-title">Ready for the Cloud, Built for On-Premises</h2>
+          <span class="slide-tag border-cyan text-cyan">Slide 11</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <ul class="bullet-list">
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Dockerized Setup:</strong> Full stack deployment in one command via `docker-compose`.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Scale-Out Ready:</strong> Stateless FastAPI nodes behind load balancers.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Flexible Database:</strong> Configured for local SQLite fallbacks and production PostgreSQL clusters.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Edge Deployment:</strong> Compatible with private cloud environments for strict data sovereignty.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="slide-right">
+            <div class="docker-nodes">
+              <div class="docker-node active-node">🐳 <span class="docker-node-label">FastAPI-1</span></div>
+              <div class="docker-node">🐳 <span class="docker-node-label">FastAPI-2</span></div>
+              <div class="docker-node">🐳 <span class="docker-node-label">FastAPI-3</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">11 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "SBI SmartLife is designed to run anywhere. The entire system is Dockerized, making it easy to deploy on SBI's private cloud or on-premises servers. The FastAPI backend is completely stateless, meaning we can scale horizontally to handle millions of concurrent YONO banking users."
+        </div>
+      </div>
+
+      <!-- Slide 12: Production-Ready Security -->
+      <div class="slide" data-theme="cyan" data-tag="Security">
+        <div class="slide-header">
+          <h2 class="slide-title">Enterprise Security & Data Safeguards</h2>
+          <span class="slide-tag border-cyan text-cyan">Slide 12</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <ul class="bullet-list">
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Data Encryption:</strong> AES-256 encryption at rest for customer profiles and transaction records.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Secure Session JWT:</strong> Encrypted tokens manage access to dashboard modules.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Strict Role-Based Access (RBAC):</strong> Enforces clear separation between Customer, RM, Admin, and Compliance roles.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Rate Limiting:</strong> Built-in middleware protects APIs from denial-of-service attempts.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="slide-right">
+            <div class="shield-security">
+              <div class="shield-ring" style="border-color: rgba(0, 229, 255, 0.15);"></div>
+              <div class="shield-card" style="border-color: var(--cyan); box-shadow: 0 0 35px rgba(0, 229, 255, 0.2);">🔒</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">12 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "Security is not an afterthought. We implement AES-256 encryption for data at rest and protect all API calls with secure JWT tokens. Our granular Role-Based Access Control ensures that an administrator cannot view customer balances, and a customer cannot access system logs, satisfying strict auditing criteria."
+        </div>
+      </div>
+
+      <!-- Slide 13: The Future Roadmap -->
+      <div class="slide" data-theme="gold" data-tag="Roadmap">
+        <div class="slide-header">
+          <h2 class="slide-title">Scaling to 500 Million Customers</h2>
+          <span class="slide-tag border-gold text-gold">Slide 13</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <div class="roadmap-timeline">
+              <div class="roadmap-item">
+                <div class="roadmap-date">Q3 2026</div>
+                <div>
+                  <h4 style="font-size:15px; font-weight:700;">Core Banking System Integration</h4>
+                  <p style="font-size:13px; color:var(--text-secondary);">Real-time transaction streaming API connection.</p>
+                </div>
+              </div>
+              <div class="roadmap-item">
+                <div class="roadmap-date">Q4 2026</div>
+                <div>
+                  <h4 style="font-size:15px; font-weight:700;">Branch RM Co-Pilot</h4>
+                  <p style="font-size:13px; color:var(--text-secondary);">Beta launch across 50 select flagship branches.</p>
+                </div>
+              </div>
+              <div class="roadmap-item">
+                <div class="roadmap-date">Q1 2027</div>
+                <div>
+                  <h4 style="font-size:15px; font-weight:700;">YONO App Integration</h4>
+                  <p style="font-size:13px; color:var(--text-secondary);">Deployment directly inside YONO mobile app.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-right">
+            <div class="roadmap-timeline">
+              <div class="roadmap-item">
+                <div class="roadmap-date">Q2 2027</div>
+                <div>
+                  <h4 style="font-size:15px; font-weight:700;">Regional Languages</h4>
+                  <p style="font-size:13px; color:var(--text-secondary);">Multi-lingual voice banking assistance rollout.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">13 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "Moving forward, our roadmap focuses on direct Core Banking System integration for real-time transaction streaming, followed by a branch pilot for relationship managers, and eventually full integration inside the YONO mobile application."
+        </div>
+      </div>
+
+      <!-- Slide 14: Competitive Advantage -->
+      <div class="slide" data-theme="cyan" data-tag="Competitive">
+        <div class="slide-header">
+          <h2 class="slide-title">Why SBI SmartLife Wins</h2>
+          <span class="slide-tag border-cyan text-cyan">Slide 14</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <ul class="bullet-list">
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Proactive vs. Reactive:</strong> Doesn't wait for queries; automates financial wellness actions.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Unified Framework:</strong> Combines 6 agents into a single collaborative LangGraph.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Compliance First:</strong> Integrated DPDP consent managers and RBI filters.</div>
+              </li>
+              <li class="bullet-item">
+                <span class="bullet-icon" style="background: var(--cyan);"></span>
+                <div><strong>Scalable Engine:</strong> Async database pools and sub-second rendering.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="slide-right">
+            <div class="compare-grid">
+              <div class="compare-card">
+                <div class="compare-title">Traditional Chatbots</div>
+                <div class="compare-item">❌ Static FAQ response</div>
+                <div class="compare-item">❌ Isolated chat logs</div>
+                <div class="compare-item">❌ No compliance filter</div>
+              </div>
+              <div class="compare-card highlight">
+                <div class="compare-title text-cyan">SBI SmartLife</div>
+                <div class="compare-item">✅ Proactive Twin Actions</div>
+                <div class="compare-item">✅ 6-Agent LangGraph</div>
+                <div class="compare-item">✅ DPDP Consent Built-in</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">14 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "Traditional bank chatbots are reactive FAQ retrievers. SBI SmartLife is different. It is proactive, unified, compliant by design, and scales seamlessly. It is a comprehensive growth engine that helps SBI build long-term relationships while driving product adoption."
+        </div>
+      </div>
+
+      <!-- Slide 15: Conclusion & Q&A -->
+      <div class="slide" data-theme="cyan" data-tag="Conclusion">
+        <div class="slide-header">
+          <h2 class="slide-title">Conclusion</h2>
+          <span class="slide-tag border-cyan text-cyan">Slide 15</span>
+        </div>
+        <div class="slide-body">
+          <div class="slide-left">
+            <h1 class="hero-title" style="font-size: 48px;">Autonomous Banking is Here</h1>
+            <p class="hero-subtitle" style="font-size: 18px; margin-bottom: 24px;">Empower SBI's customers and relationship managers today.</p>
+            <p style="font-size: 14px; color: var(--text-secondary);">State Bank of India Hackathon Team • Global Fintech Fest 2026</p>
+          </div>
+          <div class="slide-right">
+            <div style="font-size: 100px; animation: rotateCW 40s linear infinite;">🏦</div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-num-indicator">15 / 15</div>
+          <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()">←</button>
+            <button class="nav-btn" disabled onclick="nextSlide()">→</button>
+          </div>
+        </div>
+        <div class="presenter-notes-raw" style="display:none;">
+          "We have built a fully functional, production-ready hackathon platform. SBI SmartLife is ready to redefine how SBI engages, grows, and builds trust with its customers. Thank you, and I am now open to your questions."
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Presenter Notes Bottom Panel -->
+  <div class="notes-panel" id="notesPanel">
+    <div class="notes-header">
+      <span>🎙️ Presenter Script / Rehearsal Notes</span>
+      <span style="font-family: var(--font-body); font-size:10px; font-weight: normal; color: var(--text-secondary);">Press "Script" header button to hide</span>
+    </div>
+    <div class="notes-content" id="notesContent">
+      <!-- Will be updated dynamically via JS -->
+    </div>
+  </div>
+
+  <script>
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const indexDrawer = document.getElementById('indexDrawer');
+    const progressBar = document.getElementById('progressBar');
+    const slideContainer = document.getElementById('slideContainer');
+    const notesContent = document.getElementById('notesContent');
+    const notesPanel = document.getElementById('notesPanel');
+
+    // Populate Sidebar Index
+    function initIndexDrawer() {
+      indexDrawer.innerHTML = `
+        <h3 style="font-family: var(--font-title); font-size: 18px; font-weight: 700; margin-bottom: 20px; color: var(--cyan)">Slide Index</h3>
+      `;
+      slides.forEach((slide, index) => {
+        const titleEl = slide.querySelector('.slide-title');
+        const tag = slide.getAttribute('data-tag') || 'Slide';
+        const title = titleEl ? titleEl.textContent : `Slide ${index + 1}`;
+        
+        const item = document.createElement('div');
+        item.className = `index-item ${index === currentSlideIndex ? 'active' : ''}`;
+        item.innerHTML = `
+          <span>${index + 1}. ${title}</span>
+          <span style="font-size:9px; opacity:0.6; text-transform:uppercase;">${tag}</span>
+        `;
+        item.onclick = () => {
+          goToSlide(index);
+          toggleIndexDrawer();
+        };
+        indexDrawer.appendChild(item);
+      });
+    }
+
+    // Navigation function
+    function goToSlide(index) {
+      if (index < 0 || index >= slides.length) return;
+      
+      slides[currentSlideIndex].classList.remove('active');
+      currentSlideIndex = index;
+      slides[currentSlideIndex].classList.add('active');
+
+      // Update progress bar
+      const pct = ((currentSlideIndex + 1) / slides.length) * 100;
+      progressBar.style.width = `${pct}%`;
+
+      // Update container theme class
+      const theme = slides[currentSlideIndex].getAttribute('data-theme') || 'cyan';
+      slideContainer.className = `slide-container theme-${theme}`;
+
+      // Update presenter notes
+      const notesRaw = slides[currentSlideIndex].querySelector('.presenter-notes-raw');
+      notesContent.textContent = notesRaw ? notesRaw.textContent.trim() : "No notes for this slide.";
+
+      // Update active state in index items
+      const indexItems = document.querySelectorAll('.index-item');
+      indexItems.forEach((item, idx) => {
+        if (idx === currentSlideIndex) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+
+    function nextSlide() {
+      if (currentSlideIndex < slides.length - 1) {
+        goToSlide(currentSlideIndex + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlideIndex > 0) {
+        goToSlide(currentSlideIndex - 1);
+      }
+    }
+
+    // Toggle drawers
+    function toggleIndexDrawer() {
+      indexDrawer.classList.toggle('open');
+    }
+
+    function toggleNotesPanel() {
+      notesPanel.classList.toggle('open');
+      const btn = document.getElementById('notesToggleBtn');
+      if (notesPanel.classList.contains('open')) {
+        btn.style.color = 'var(--cyan)';
+        btn.style.borderColor = 'var(--cyan)';
+      } else {
+        btn.style.color = '';
+        btn.style.borderColor = '';
+      }
+    }
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      } else if (e.key === 'n' || e.key === 's') {
+        toggleNotesPanel();
+      } else if (e.key === 'i') {
+        toggleIndexDrawer();
+      }
+    });
+
+    // Fullscreen support
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.error(`Error enabling fullscreen: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Initialize
+    window.onload = () => {
+      initIndexDrawer();
+      goToSlide(0);
+      toggleNotesPanel(); // Open presenter script panel by default for rehearsals
+    };
+  </script>
+</body>
+</html>
