@@ -51,6 +51,10 @@ async def init_db():
         async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
         logger.info("Database initialized successfully.")
+        
+        # Seed ChromaDB vector store
+        from app.rag.vector_store import vector_store
+        vector_store.seed_banking_knowledge()
     except Exception as e:
         if "postgresql" in settings.DATABASE_URL:
             logger.warning(f"Failed to connect to PostgreSQL: {e}. Falling back to SQLite local database...")
@@ -64,6 +68,10 @@ async def init_db():
             async with engine.begin() as conn:
                 await conn.run_sync(Base.metadata.create_all)
             logger.info("Local SQLite database initialized successfully.")
+            
+            # Seed ChromaDB vector store for fallback database
+            from app.rag.vector_store import vector_store
+            vector_store.seed_banking_knowledge()
         else:
             raise e
 

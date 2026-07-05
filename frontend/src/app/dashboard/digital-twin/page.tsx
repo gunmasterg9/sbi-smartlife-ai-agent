@@ -143,10 +143,10 @@ export default function DigitalTwinPage() {
           <h3 style={{ fontFamily: "Outfit", fontSize: 16, fontWeight: 700, marginBottom: 20 }}>💰 Spending Profile</h3>
           <ResponsiveContainer width="100%" height={260}>
             <PieChart>
-              <Pie data={data.spending} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={2} dataKey="amount" label={({ category, pct }) => `${category} ${pct}%`}>
+              <Pie data={data.spending} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={2} dataKey="amount" label={({ category, pct }: any) => `${category} ${pct}%`}>
                 {data.spending.map((s, i) => <Cell key={i} fill={s.color} stroke="transparent" />)}
               </Pie>
-              <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => `₹${v.toLocaleString()}`} />
+              <Tooltip contentStyle={tooltipStyle} formatter={(v: any) => `₹${Number(v).toLocaleString()}`} />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -173,7 +173,7 @@ export default function DigitalTwinPage() {
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(99,115,175,0.1)" />
             <XAxis dataKey="month" tick={{ fill: "#64748b", fontSize: 12 }} axisLine={false} />
             <YAxis tick={{ fill: "#64748b", fontSize: 12 }} axisLine={false} tickFormatter={(v) => `₹${(v / 1000).toFixed(0)}K`} />
-            <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => `₹${v.toLocaleString()}`} />
+            <Tooltip contentStyle={tooltipStyle} formatter={(v: any) => `₹${Number(v).toLocaleString()}`} />
             <Legend wrapperStyle={{ fontSize: 12 }} />
             <Bar dataKey="income" name="Income" fill="#10b981" radius={[4, 4, 0, 0]} />
             <Bar dataKey="expense" name="Expense" fill="#f43f5e80" radius={[4, 4, 0, 0]} />

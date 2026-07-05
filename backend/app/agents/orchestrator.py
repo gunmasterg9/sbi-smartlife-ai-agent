@@ -1,29 +1,33 @@
 """Agent Orchestrator - Routes messages to the appropriate specialized agent"""
 from typing import Dict, Any, Optional
+import logging
 from app.agents.acquisition import AcquisitionAgent
 from app.agents.adoption import AdoptionAgent
 from app.agents.engagement_agent import EngagementAgent
 from app.agents.wellness import WellnessAgent
 from app.agents.life_events import LifeEventAgent
 from app.agents.relationship import RelationshipAgent
+from app.agents.langgraph_workflow import run_agent_workflow
 from app.config import settings
+
+logger = logging.getLogger("sbi_orchestrator")
 
 
 class AgentOrchestrator:
     """
     Supervisor agent that routes user messages to the appropriate specialist agent.
-    In production, this would use LangGraph for stateful multi-agent coordination.
+    Supports stateful multi-agent coordination using LangGraph, with keyword fallback.
     """
 
     def __init__(self):
-        mode = settings.AI_MODE
+        self.mode = settings.AI_MODE  # "simulated" | "live" | "langgraph"
         self.agents = {
-            "acquisition": AcquisitionAgent(mode=mode),
-            "adoption": AdoptionAgent(mode=mode),
-            "engagement": EngagementAgent(mode=mode),
-            "wellness": WellnessAgent(mode=mode),
-            "life_events": LifeEventAgent(mode=mode),
-            "relationship": RelationshipAgent(mode=mode),
+            "acquisition": AcquisitionAgent(mode=self.mode),
+            "adoption": AdoptionAgent(mode=self.mode),
+            "engagement": EngagementAgent(mode=self.mode),
+            "wellness": WellnessAgent(mode=self.mode),
+            "life_events": LifeEventAgent(mode=self.mode),
+            "relationship": RelationshipAgent(mode=self.mode),
         }
 
         # Intent detection keywords
@@ -81,8 +85,21 @@ class AgentOrchestrator:
         session_id: str = "",
         db=None,
     ) -> Dict[str, Any]:
-        """Process a message through the appropriate agent"""
-        # Classify intent
+        """Process a message through the appropriate agent or LangGraph workflow"""
+        # If config is set to live/langgraph mode, attempt LangGraph workflow first
+        if self.mode in ("live", "langgraph"):
+            try:
+                logger.info(f"Running query through LangGraph workflow (mode={self.mode})")
+                return await run_agent_workflow(
+                    message=message,
+                    customer_id=customer_id,
+                    language=language,
+                    session_id=session_id,
+                )
+            except Exception as e:
+                logger.error(f"LangGraph execution failed: {e}. Falling back to keyword orchestrator.")
+
+        # Keyword-based routing fallback
         agent_type = self._classify_intent(message)
         agent = self.agents.get(agent_type, self.agents["relationship"])
 

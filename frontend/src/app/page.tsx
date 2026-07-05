@@ -85,22 +85,22 @@ export default function LandingPage() {
       {/* Animated Background */}
       <div style={{
         position: "fixed", inset: 0, zIndex: 0, overflow: "hidden",
-        background: "radial-gradient(ellipse at 20% 50%, rgba(26,35,126,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(57,73,171,0.1) 0%, transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(249,168,37,0.05) 0%, transparent 50%)",
+        background: "radial-gradient(ellipse at 20% 50%, rgba(0,229,255,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(213,0,249,0.05) 0%, transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(0,230,118,0.02) 0%, transparent 50%)",
       }}>
         {/* Floating orbs */}
         <div style={{
-          position: "absolute", width: 400, height: 400, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(26,35,126,0.2) 0%, transparent 70%)",
+          position: "absolute", width: 450, height: 450, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(0,229,255,0.1) 0%, transparent 70%)",
           top: "10%", left: "5%", animation: "float 8s ease-in-out infinite",
         }} />
         <div style={{
-          position: "absolute", width: 300, height: 300, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(249,168,37,0.1) 0%, transparent 70%)",
+          position: "absolute", width: 350, height: 350, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(213,0,249,0.08) 0%, transparent 70%)",
           top: "60%", right: "10%", animation: "float 6s ease-in-out infinite 1s",
         }} />
         <div style={{
-          position: "absolute", width: 200, height: 200, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%)",
+          position: "absolute", width: 250, height: 250, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(0,230,118,0.05) 0%, transparent 70%)",
           bottom: "20%", left: "30%", animation: "float 7s ease-in-out infinite 2s",
         }} />
       </div>
@@ -109,7 +109,7 @@ export default function LandingPage() {
       <nav style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
         padding: "16px 32px",
-        background: "rgba(10, 14, 26, 0.8)",
+        background: "rgba(0, 0, 0, 0.85)",
         backdropFilter: "blur(20px)",
         borderBottom: "1px solid var(--border-subtle)",
       }}>
@@ -120,6 +120,7 @@ export default function LandingPage() {
               background: "var(--gradient-primary)",
               display: "flex", alignItems: "center", justifyContent: "center",
               fontSize: 20, fontWeight: 800, color: "white",
+              boxShadow: "0 0 15px rgba(0, 242, 254, 0.3)",
             }}>S</div>
             <div>
               <div style={{ fontFamily: "Outfit", fontWeight: 700, fontSize: 18, color: "var(--text-primary)" }}>SBI SmartLife</div>
@@ -131,6 +132,7 @@ export default function LandingPage() {
               padding: "10px 24px", borderRadius: "var(--radius-md)",
               background: "var(--gradient-primary)", color: "white",
               textDecoration: "none", fontWeight: 600, fontSize: 14,
+              boxShadow: "0 4px 15px rgba(0, 242, 254, 0.2)",
               transition: "all 0.3s ease",
             }}>
               Launch Dashboard →
@@ -151,10 +153,11 @@ export default function LandingPage() {
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8,
             padding: "8px 20px", borderRadius: "var(--radius-full)",
-            background: "rgba(26, 35, 126, 0.2)", border: "1px solid rgba(57, 73, 171, 0.3)",
-            fontSize: 13, color: "var(--sbi-blue-300)", marginBottom: 32,
+            background: "rgba(0, 229, 255, 0.08)", border: "1px solid rgba(0, 229, 255, 0.25)",
+            fontSize: 13, color: "var(--cyan)", marginBottom: 32,
+            boxShadow: "0 0 15px rgba(0, 229, 255, 0.05)",
           }}>
-            <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#10b981", animation: "pulse-glow 2s infinite" }} />
+            <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--cyan)", animation: "pulse-glow 2s infinite" }} />
             SBI @ Global Fintech Fest 2026
           </div>
 
@@ -166,7 +169,7 @@ export default function LandingPage() {
           }}>
             <span style={{ color: "var(--text-primary)" }}>The </span>
             <span style={{
-              background: "linear-gradient(135deg, #5c6bc0, #7986cb, #f9a825)",
+              background: "linear-gradient(135deg, #00f2fe, #d500f9, #ff2d55)",
               WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
             }}>Autonomous Banking</span>
             <br />
@@ -177,17 +180,17 @@ export default function LandingPage() {
             fontSize: "clamp(16px, 2vw, 20px)", color: "var(--text-secondary)",
             maxWidth: 650, margin: "0 auto 48px", lineHeight: 1.7,
           }}>
-            AI-powered ecosystem that creates a <strong style={{ color: "var(--gold)" }}>Customer Digital Twin</strong> for 
+            AI-powered ecosystem that creates a <strong style={{ color: "var(--cyan)" }}>Customer Digital Twin</strong> for 
             every customer — predicting needs, delivering proactive recommendations, and 
             guiding them through their entire financial journey.
           </p>
 
           {/* CTA Buttons */}
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap", marginBottom: 64 }}>
-            <Link href="/dashboard" className="btn-primary" style={{ padding: "16px 40px", fontSize: 16, borderRadius: "var(--radius-lg)", textDecoration: "none" }}>
+            <Link href="/dashboard" className="btn-primary" style={{ padding: "16px 40px", fontSize: 16, borderRadius: "var(--radius-lg)", textDecoration: "none", boxShadow: "0 4px 20px rgba(0, 242, 254, 0.25)" }}>
               🚀 Explore Platform
             </Link>
-            <Link href="/dashboard/assistant" className="btn-secondary" style={{ padding: "16px 40px", fontSize: 16, borderRadius: "var(--radius-lg)", textDecoration: "none" }}>
+            <Link href="/dashboard/assistant" className="btn-secondary" style={{ padding: "16px 40px", fontSize: 16, borderRadius: "var(--radius-lg)", textDecoration: "none", color: "var(--text-primary)", borderColor: "rgba(255,255,255,0.15)" }}>
               💬 Try AI Assistant
             </Link>
           </div>
@@ -281,7 +284,9 @@ export default function LandingPage() {
       }}>
         <div className="glass-card" style={{
           maxWidth: 800, margin: "0 auto", padding: "64px 48px",
-          background: "linear-gradient(135deg, rgba(26,35,126,0.3), rgba(57,73,171,0.1))",
+          background: "linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(213, 0, 249, 0.03) 100%)",
+          border: "1px solid rgba(255, 255, 255, 0.08)",
+          boxShadow: "0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 229, 255, 0.05)",
         }}>
           <h2 style={{ fontFamily: "Outfit", fontSize: 36, fontWeight: 800, marginBottom: 16 }}>
             Ready to Transform Banking?
@@ -289,7 +294,7 @@ export default function LandingPage() {
           <p style={{ fontSize: 18, color: "var(--text-secondary)", marginBottom: 32 }}>
             Experience the future of autonomous banking — powered by Agentic AI.
           </p>
-          <Link href="/dashboard" className="btn-primary" style={{ padding: "18px 48px", fontSize: 18, borderRadius: "var(--radius-lg)", textDecoration: "none" }}>
+          <Link href="/dashboard" className="btn-primary" style={{ padding: "18px 48px", fontSize: 18, borderRadius: "var(--radius-lg)", textDecoration: "none", boxShadow: "0 4px 20px rgba(0, 242, 254, 0.25)" }}>
             🏦 Enter Platform Dashboard
           </Link>
         </div>

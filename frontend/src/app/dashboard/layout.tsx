@@ -65,8 +65,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 marginBottom: 2, borderRadius: "var(--radius-sm)",
                 textDecoration: "none", fontSize: 14,
                 color: isActive ? "var(--text-primary)" : "var(--text-secondary)",
-                background: isActive ? "rgba(26, 35, 126, 0.2)" : "transparent",
-                borderLeft: isActive ? "3px solid var(--sbi-blue-400)" : "3px solid transparent",
+                background: isActive ? "rgba(255, 255, 255, 0.05)" : "transparent",
+                borderLeft: isActive ? "3px solid var(--cyan)" : "3px solid transparent",
+                boxShadow: isActive ? "0 0 15px rgba(0, 229, 255, 0.08)" : "none",
                 transition: "all 0.2s ease",
                 fontWeight: isActive ? 600 : 400,
                 whiteSpace: "nowrap",
@@ -101,7 +102,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           padding: "16px 32px",
           borderBottom: "1px solid var(--border-subtle)",
           display: "flex", justifyContent: "space-between", alignItems: "center",
-          background: "rgba(10, 14, 26, 0.8)",
+          background: "rgba(0, 0, 0, 0.8)",
           backdropFilter: "blur(20px)",
           position: "sticky", top: 0, zIndex: 30,
         }}>
@@ -121,7 +122,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </div>
             <div style={{
               width: 36, height: 36, borderRadius: "50%",
-              background: "var(--gradient-primary)",
+              background: "var(--gradient-metal-carbon)",
+              border: "1px solid rgba(255,255,255,0.15)",
               display: "flex", alignItems: "center", justifyContent: "center",
               fontSize: 14, fontWeight: 700, color: "white", cursor: "pointer",
             }}>A</div>

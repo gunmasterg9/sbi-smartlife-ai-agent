@@ -26,8 +26,10 @@ class Settings(BaseSettings):
 
     # AI Configuration
     AI_MODE: str = "simulated"  # "simulated" | "live"
+    AI_PROVIDER: str = "gemini"  # "gemini" | "openai" | "ollama"
     GEMINI_API_KEY: Optional[str] = None
     OPENAI_API_KEY: Optional[str] = None
+    OLLAMA_BASE_URL: str = "http://localhost:11434"
     AI_MODEL: str = "gemini-2.5-flash"
     AI_TEMPERATURE: float = 0.7
 

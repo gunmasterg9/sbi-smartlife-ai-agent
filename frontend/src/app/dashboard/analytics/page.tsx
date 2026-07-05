@@ -250,7 +250,7 @@ export default function AnalyticsPage() {
                 innerRadius={55} outerRadius={85}
                 paddingAngle={3}
                 dataKey="value"
-                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                label={({ name, percent }) => `${name} ${((percent || 0) * 100).toFixed(0)}%`}
               >
                 {segmentData.map((entry, i) => (
                   <Cell key={i} fill={entry.color} stroke="transparent" />

@@ -2,60 +2,67 @@
 @import "tailwindcss";
 
 :root {
-  /* SBI-Inspired Color Palette */
-  --sbi-blue-50: #e8eaf6;
-  --sbi-blue-100: #c5cae9;
-  --sbi-blue-200: #9fa8da;
-  --sbi-blue-300: #7986cb;
-  --sbi-blue-400: #5c6bc0;
-  --sbi-blue-500: #3f51b5;
-  --sbi-blue-600: #3949ab;
-  --sbi-blue-700: #303f9f;
-  --sbi-blue-800: #283593;
-  --sbi-blue-900: #1a237e;
+  /* Revolut-Inspired Sleek Dark Color Palette */
+  --sbi-blue-50: #f0f4f9;
+  --sbi-blue-100: #d2e3fc;
+  --sbi-blue-200: #a8c7fa;
+  --sbi-blue-300: #7cacf8;
+  --sbi-blue-400: #4285f4;
+  --sbi-blue-500: #1a73e8;
+  --sbi-blue-600: #185abc;
+  --sbi-blue-700: #1557b0;
+  --sbi-blue-800: #124c96;
+  --sbi-blue-900: #0b2f61;
 
-  /* Accent Colors */
-  --gold: #f9a825;
-  --gold-light: #fdd835;
-  --teal: #00897b;
-  --teal-light: #26a69a;
-  --emerald: #10b981;
-  --rose: #f43f5e;
-  --violet: #8b5cf6;
-  --amber: #f59e0b;
-  --cyan: #06b6d4;
+  /* Accent Colors - High Precision Neon */
+  --gold: #ffb300;
+  --gold-light: #ffe082;
+  --teal: #00e5ff;
+  --teal-light: #84ffff;
+  --emerald: #00e676;
+  --rose: #ff2d55;
+  --violet: #d500f9;
+  --amber: #ff9100;
+  --cyan: #00e5ff;
 
-  /* Dark Theme */
-  --bg-primary: #0a0e1a;
-  --bg-secondary: #0f1629;
-  --bg-card: #151c32;
-  --bg-card-hover: #1a2340;
-  --bg-elevated: #1e2746;
-  --border-subtle: rgba(99, 115, 175, 0.15);
-  --border-medium: rgba(99, 115, 175, 0.25);
+  /* Sleek Dark Theme Core */
+  --bg-primary: #000000;
+  --bg-secondary: #080808;
+  --bg-card: #121212;
+  --bg-card-hover: #1a1a1a;
+  --bg-elevated: #222222;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.15);
 
-  /* Text */
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  /* Text - Clean and high contrast */
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --text-muted: #666666;
 
-  /* Glass */
-  --glass-bg: rgba(21, 28, 50, 0.7);
-  --glass-border: rgba(99, 115, 175, 0.2);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  /* Glassmorphism settings */
+  --glass-bg: rgba(18, 18, 18, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
-  --gradient-accent: linear-gradient(135deg, #f9a825 0%, #fdd835 100%);
-  --gradient-card: linear-gradient(135deg, rgba(26, 35, 126, 0.1) 0%, rgba(57, 73, 171, 0.05) 100%);
-  --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #1a237e 50%, #283593 100%);
+  /* Premium Card Gradients */
+  --gradient-primary: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  --gradient-accent: linear-gradient(135deg, #ffb300 0%, #ffe082 100%);
+  --gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  --gradient-hero: radial-gradient(circle at top, #111111 0%, #000000 100%);
+  
+  /* Metallic Gradients */
+  --gradient-metal-carbon: linear-gradient(135deg, #1f1f1f 0%, #0d0d0d 100%);
+  --gradient-metal-silver: linear-gradient(135deg, #e0e0e0 0%, #b0b0b0 50%, #909090 100%);
+  --gradient-metal-gold: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+  --gradient-metal-rose: linear-gradient(135deg, #f3a683 0%, #f7d794 100%);
+  --gradient-metal-holographic: linear-gradient(135deg, #ff007f 0%, #7f00ff 50%, #00f5ff 100%);
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(26, 35, 126, 0.3);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.8);
+  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.9);
+  --shadow-glow: 0 0 25px rgba(0, 242, 254, 0.15);
 
   /* Radius */
   --radius-sm: 8px;
@@ -98,13 +105,13 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--glass-shadow);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(99, 115, 175, 0.35);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 242, 254, 0.1);
+  transform: translateY(-4px);
 }
 
 /* Gradient Card */
@@ -112,8 +119,40 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--gradient-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.gradient-card:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
+}
+
+/* Precision Fintech Numbers & Details */
+.fintech-num {
+  font-variant-numeric: tabular-nums;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.metallic-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.metallic-shine::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transform: skewX(-25deg);
+  transition: 0.75s;
+}
+
+.metallic-shine:hover::before {
+  left: 150%;
+}
+
 
 /* Scrollbar */
 ::-webkit-scrollbar {

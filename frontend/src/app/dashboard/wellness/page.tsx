@@ -151,7 +151,7 @@ export default function WellnessPage() {
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(99,115,175,0.1)" horizontal={false} />
               <XAxis type="number" tick={{ fill: "#64748b", fontSize: 11 }} axisLine={false} tickFormatter={(v) => `₹${(v / 1000).toFixed(0)}K`} />
               <YAxis type="category" dataKey="category" tick={{ fill: "#94a3b8", fontSize: 12 }} axisLine={false} width={80} />
-              <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => `₹${v.toLocaleString()}`} />
+              <Tooltip contentStyle={tooltipStyle} formatter={(v: any) => `₹${Number(v).toLocaleString()}`} />
               <Legend wrapperStyle={{ fontSize: 12 }} />
               <Bar dataKey="budget" name="Budget" fill="#3b82f640" radius={[0, 4, 4, 0]} />
               <Bar dataKey="actual" name="Actual" radius={[0, 4, 4, 0]}>

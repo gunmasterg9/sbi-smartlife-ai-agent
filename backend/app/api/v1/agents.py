@@ -83,28 +83,36 @@ async def get_agent_actions(
     limit: int = 50,
     db: AsyncSession = Depends(get_db),
 ):
-    """Get recent agent actions"""
-    query = select(AgentAction)
+    """Get recent agent actions with customer names"""
+    from app.models.customer import CustomerProfile
+    
+    query = select(
+        AgentAction,
+        CustomerProfile.first_name,
+        CustomerProfile.last_name
+    ).outerjoin(CustomerProfile, AgentAction.customer_id == CustomerProfile.id)
+    
     if agent_type:
         query = query.where(AgentAction.agent_type == agent_type)
     
     query = query.order_by(AgentAction.timestamp.desc()).limit(limit)
     result = await db.execute(query)
-    actions = result.scalars().all()
+    rows = result.all()
 
     return {
         "actions": [
             {
-                "id": str(a.id),
-                "agent_type": a.agent_type,
-                "agent_name": a.agent_name,
-                "action": a.action,
-                "customer_id": str(a.customer_id) if a.customer_id else None,
-                "status": a.status,
-                "duration_ms": a.duration_ms,
-                "confidence": a.confidence,
-                "timestamp": a.timestamp.isoformat() if a.timestamp else None,
+                "id": str(row[0].id),
+                "agent_type": row[0].agent_type,
+                "agent_name": row[0].agent_name,
+                "action": row[0].action,
+                "customer_id": str(row[0].customer_id) if row[0].customer_id else None,
+                "customer_name": f"{row[1]} {row[2]}" if row[1] else "General System",
+                "status": row[0].status,
+                "duration_ms": row[0].duration_ms,
+                "confidence": row[0].confidence,
+                "timestamp": row[0].timestamp.isoformat() if row[0].timestamp else None,
             }
-            for a in actions
+            for row in rows
         ]
     }

@@ -21,10 +21,13 @@ class VectorStore:
     def client(self) -> chromadb.ClientAPI:
         if self._client is None:
             try:
-                self._client = chromadb.HttpClient(
+                client_instance = chromadb.HttpClient(
                     host=settings.CHROMA_HOST,
                     port=settings.CHROMA_PORT,
                 )
+                # Verify that connection works
+                client_instance.heartbeat()
+                self._client = client_instance
                 logger.info(f"Connected to ChromaDB at {settings.CHROMA_HOST}:{settings.CHROMA_PORT}")
             except Exception as e:
                 logger.warning(f"ChromaDB remote unavailable: {e}, using in-memory fallback")
@@ -94,17 +97,20 @@ class VectorStore:
 
     def seed_banking_knowledge(self) -> None:
         """Seed the knowledge base with SBI banking product information"""
-        if self.get_collection_count() > 0:
-            logger.info("Knowledge base already seeded")
-            return
+        try:
+            if self.get_collection_count() > 0:
+                logger.info("Knowledge base already seeded")
+                return
 
-        documents = BANKING_KNOWLEDGE
-        metadatas = [{"category": doc["category"], "product": doc.get("product", "general")} for doc in documents]
-        ids = [f"kb_{i}" for i in range(len(documents))]
-        texts = [doc["content"] for doc in documents]
+            documents = BANKING_KNOWLEDGE
+            metadatas = [{"category": doc["category"], "product": doc.get("product", "general")} for doc in documents]
+            ids = [f"kb_{i}" for i in range(len(documents))]
+            texts = [doc["content"] for doc in documents]
 
-        self.add_documents(texts, metadatas, ids)
-        logger.info(f"Seeded knowledge base with {len(documents)} documents")
+            self.add_documents(texts, metadatas, ids)
+            logger.info(f"Seeded knowledge base with {len(documents)} documents")
+        except Exception as e:
+            logger.warning(f"Failed to seed ChromaDB vector store: {e}. RAG features may be offline or limited.")
 
 
 # ─── Banking Knowledge Base ───
