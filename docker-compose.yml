@@ -38,7 +38,8 @@ services:
       - DATABASE_SYNC_URL=postgresql://sbi_user:sbi_password@postgres:5432/sbi_smartlife
       - CHROMA_HOST=chromadb
       - CHROMA_PORT=8000
-      - AI_MODE=simulated
+      - AI_MODE=${AI_MODE:-simulated}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
       - CORS_ORIGINS=http://localhost:3000,http://localhost:3001
     depends_on:
       postgres:

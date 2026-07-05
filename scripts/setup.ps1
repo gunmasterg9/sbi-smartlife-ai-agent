@@ -18,11 +18,43 @@ if (-not (Test-Path ".venv")) {
 Write-Host "Activating virtual environment and installing dependencies..." -ForegroundColor Gray
 & .venv\Scripts\pip install -r requirements.txt
 
-# Create .env from .env.example if it doesn't exist
-if (-not (Test-Path ".env")) {
-    Write-Host "Creating .env configuration file..." -ForegroundColor Gray
-    Copy-Item ".env.example" ".env"
+# Create .env at project root from .env.example if it doesn't exist
+$RootEnv = "$ProjectRoot\.env"
+$RootEnvExample = "$ProjectRoot\.env.example"
+
+if (-not (Test-Path $RootEnv)) {
+    if (Test-Path $RootEnvExample) {
+        Write-Host "Creating root .env configuration file..." -ForegroundColor Gray
+        Copy-Item $RootEnvExample $RootEnv
+    } else {
+        Write-Host "Warning: .env.example not found in project root!" -ForegroundColor Yellow
+    }
 }
+
+# Prompt user for API Key
+if (Test-Path $RootEnv) {
+    Write-Host "`nWould you like to configure your Gemini API Key to enable live AI features? [Y/N] (Default: N)" -ForegroundColor Cyan
+    $choice = Read-Host
+    if ($choice -match '^[Yy]$') {
+        $apiKey = Read-Host "Enter your GEMINI_API_KEY"
+        if ($apiKey) {
+            # Update root .env with live mode and API key
+            $envContent = Get-Content $RootEnv
+            $envContent = $envContent -replace 'AI_MODE=simulated', 'AI_MODE=live'
+            $envContent = $envContent -replace 'GEMINI_API_KEY=.*', "GEMINI_API_KEY=$apiKey"
+            $envContent | Set-Content $RootEnv
+            Write-Host "Root .env updated with live AI mode and your API key." -ForegroundColor Green
+        }
+    }
+}
+
+# Sync root .env to backend and frontend
+Write-Host "Syncing .env file to backend and frontend..." -ForegroundColor Gray
+if (Test-Path $RootEnv) {
+    Copy-Item $RootEnv "$ProjectRoot\backend\.env" -Force
+    Copy-Item $RootEnv "$ProjectRoot\frontend\.env.local" -Force
+}
+
 
 # Run Database Migrations and Seed data on SQLite
 Write-Host "Initializing SQLite database and generating 500 customer records..." -ForegroundColor Gray
