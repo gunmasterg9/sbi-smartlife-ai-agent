@@ -911,6 +911,48 @@
     ::-webkit-scrollbar-thumb:hover {
       background: rgba(255, 255, 255, 0.2);
     }
+
+    /* Print Styles for PDF Export */
+    @media print {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      body {
+        background-color: var(--bg-dark) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        overflow: visible !important;
+        height: auto !important;
+      }
+      header, .header-controls, .nav-controls, .index-drawer, .notes-panel, .glow-sphere {
+        display: none !important;
+      }
+      .deck-workspace {
+        padding: 0 !important;
+        display: block !important;
+        height: auto !important;
+      }
+      .slide-container {
+        max-width: none !important;
+        height: auto !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        display: block !important;
+      }
+      .slide {
+        display: flex !important;
+        opacity: 1 !important;
+        page-break-after: always;
+        break-after: page;
+        height: 100vh;
+        padding: 40px;
+        justify-content: space-between;
+        box-sizing: border-box;
+      }
+    }
   </style>
 </head>
 <body>
